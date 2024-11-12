@@ -4,10 +4,10 @@ import cssValueParser from 'postcss-value-parser'
 import { unescapeStringValue } from './css.js'
 import { isSVGImageElement, isSVGStyleElement, svgNamespace } from './dom.js'
 import { handleSvgNode } from './svg.js'
-import { withTimeout, assert } from './util.js'
+import { withTimeout, assert, quote } from './util.js'
 
 declare global {
-	interface SVGStyleElement extends LinkStyle {}
+	interface SVGStyleElement extends LinkStyle { }
 }
 
 /**
@@ -54,6 +54,7 @@ export async function inlineResources(element: Element): Promise<void> {
 							svgDocument,
 							idPrefix: `${element.id}-`,
 							options: {
+								convert: quote,
 								// SVGs embedded through <img> are never interactive.
 								keepLinks: false,
 								captureArea: svgRoot.viewBox.baseVal,

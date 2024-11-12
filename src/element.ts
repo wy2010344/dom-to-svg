@@ -258,7 +258,7 @@ function addBackgroundAndBorders(
 	bounds: DOMRect,
 	backgroundAndBordersContainer: SVGElement,
 	window: Window,
-	context: Pick<TraversalContext, 'getUniqueId' | 'svgDocument'>
+	context: Pick<TraversalContext, 'getUniqueId' | 'svgDocument' | 'options'>
 ): void {
 	if (isVisible(styles)) {
 		if (
@@ -324,7 +324,7 @@ function addBackgroundAndBorders(
 								(backgroundRepeat === 'repeat' || backgroundRepeat === 'repeat-x'
 									? backgroundWidth
 									: // If background shouldn't repeat on this axis, make the tile as big as the element so the repetition is cut off.
-									  backgroundWidth + bounds.x + backgroundPositionX
+									backgroundWidth + bounds.x + backgroundPositionX
 								).toString()
 							)
 							pattern.setAttribute(
@@ -332,7 +332,7 @@ function addBackgroundAndBorders(
 								(backgroundRepeat === 'repeat' || backgroundRepeat === 'repeat-y'
 									? backgroundHeight
 									: // If background shouldn't repeat on this axis, make the tile as big as the element so the repetition is cut off.
-									  backgroundHeight + bounds.y + backgroundPositionY
+									backgroundHeight + bounds.y + backgroundPositionY
 								).toString()
 							)
 							pattern.id = context.getUniqueId('pattern')
@@ -342,7 +342,7 @@ function addBackgroundAndBorders(
 						}
 					} else if (/^(-webkit-)?linear-gradient$/.test(backgroundNode.value)) {
 						const linearGradientCss = cssValueParser.stringify(backgroundNode)
-						const svgLinearGradient = convertLinearGradient(linearGradientCss, context)
+						const svgLinearGradient = convertLinearGradient(context.options.convert(linearGradientCss), context)
 						if (backgroundPositionX !== 0 || backgroundPositionY !== 0) {
 							svgLinearGradient.setAttribute(
 								'gradientTransform',

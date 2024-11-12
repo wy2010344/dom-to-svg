@@ -5,7 +5,7 @@ import { isCSSFontFaceRule, unescapeStringValue } from './css.js'
 import { svgNamespace, xlinkNamespace } from './dom.js'
 import { createStackingLayers } from './stacking.js'
 import { DomToSvgOptions, walkNode } from './traversal.js'
-import { createIdGenerator } from './util.js'
+import { createIdGenerator, quote } from './util.js'
 
 export { DomToSvgOptions }
 
@@ -73,6 +73,7 @@ export function elementToSVG(element: Element, options?: DomToSvgOptions): XMLDo
 		labels: new Map<HTMLLabelElement, string>(),
 		ancestorMasks: [],
 		options: {
+			convert: options?.convert || quote,
 			captureArea: options?.captureArea ?? element.getBoundingClientRect(),
 			keepLinks: options?.keepLinks !== false,
 		},
@@ -85,5 +86,6 @@ export function elementToSVG(element: Element, options?: DomToSvgOptions): XMLDo
 
 	return svgDocument
 }
+
 
 export { inlineResources } from './inline.js'

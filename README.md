@@ -1,3 +1,22 @@
+使用 PUPPETEER_SKIP_DOWNLOAD=true npm install 安装
+增加了 convert 函数,对于像 linear-gradient( 180deg, #dcecff 9.875rem, #ffffff 10.625rem, #ffffff 100% ),使用
+
+```ts
+const svgDocument = elementToSVG(which, {
+	convert(gradient) {
+		return gradient.replace(/(\d+\.?\d*)rem/g, (match, remValue) => {
+			return `${relatePx(remValue)}px`
+		})
+	},
+})
+```
+
+将 rem 转为 px,这样内部库里的 gradient-parser 就能识别了
+不能很好地支持 z-index,需要手动放到最后面
+对 border-radius 没有支持.....
+最好还是换用 canvas 如 react-konva
+https://github.com/wy2010344/dom-to-svg
+
 # DOM to SVG
 
 [![npm](https://img.shields.io/npm/v/dom-to-svg)](https://www.npmjs.com/package/dom-to-svg)

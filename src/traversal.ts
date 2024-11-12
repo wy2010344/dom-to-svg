@@ -4,6 +4,7 @@ import { StackingLayers } from './stacking.js'
 import { handleTextNode } from './text.js'
 
 export interface DomToSvgOptions {
+	convert(n: string): string
 	/**
 	 * To visual area to contrain the SVG too.
 	 * Elements that do not intersect the capture area are not included in the SVG.

@@ -1,5 +1,5 @@
 {
-	"name": "dom-to-svg",
+	"name": "dom-to-svg-wy",
 	"version": "0.1.2",
 	"description": "Take SVG screenshots of DOM elements",
 	"main": "lib/index.js",

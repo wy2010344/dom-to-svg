@@ -50,3 +50,8 @@ export function assert(condition: any, message: string): asserts condition {
 		throw new Error(message)
 	}
 }
+
+
+export function quote<T>(a: T) {
+	return a
+}
